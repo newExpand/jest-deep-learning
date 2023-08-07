@@ -28,3 +28,28 @@ test("스쿱이 바꼈을 때 바뀐 스쿱갯수가 반영 되는지 테스트"
     await user.type(chocolateInput, "2");
     expect(scoopsSubTotal).toHaveTextContent("Scoops 총액: 6,000원");
 });
+
+test("토핑을 추가했을 때 바뀐 토핑값이 반영되는지 테스트", async () => {
+    const user = userEvent.setup();
+    render(<Options optionType="toppings" />);
+
+    // 처음 시작은 0원인지에 대한 테스트
+    const toppingSubTotal = screen.getByText("Toppings 총액: 0원", { exact: false });
+    expect(toppingSubTotal).toHaveTextContent("0");
+
+    // 체리 체크박스 클릭했을 때 가격 테스트
+    const CherriesCheckbox = await screen.findByRole("checkbox", { name: "Cherries" });
+
+    await user.click(CherriesCheckbox);
+    expect(toppingSubTotal).toHaveTextContent("Toppings 총액: 1,500원");
+
+    // M&Ms 체크박스 클릭했을 때 가격 테스트
+    const MAndMsCheckbox = await screen.findByRole("checkbox", { name: "M&Ms" });
+
+    await user.click(MAndMsCheckbox);
+    expect(toppingSubTotal).toHaveTextContent("Toppings 총액: 3,000원");
+
+    // M&Ms 체크박스 체크 풀었을 때 가격 테스트
+    await user.click(MAndMsCheckbox);
+    expect(toppingSubTotal).toHaveTextContent("Toppings 총액: 1,500원");
+});
