@@ -1,4 +1,4 @@
 export const pricePerItem = {
-    scoops: 2,
-    toppings: 1,
+    scoops: 2000,
+    toppings: 1500,
 };
