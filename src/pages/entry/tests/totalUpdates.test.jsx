@@ -57,9 +57,11 @@ test("토핑을 추가했을 때 바뀐 토핑값이 반영되는지 테스트",
 
 describe("스쿱,토핑 관련 총액 테스트", () => {
     test("전체 총액이 0원으로 시작하는지 테스트", () => {
-        render(<OrderEntry />);
+        const { unmount } = render(<OrderEntry />);
         const grandTotal = screen.getByRole("heading", { name: /전체 총액: / });
         expect(grandTotal).toHaveTextContent("전체 총액: 0원");
+
+        unmount();
     });
     test("스쿱을 먼저 추가했을 때 전체 총액이 올바르게 업데이트 되는지 테스트", async () => {
         const user = userEvent.setup();
