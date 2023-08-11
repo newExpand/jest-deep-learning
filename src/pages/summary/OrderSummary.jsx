@@ -2,7 +2,7 @@ import SummaryForm from "./SummaryForm";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 import { formatCurrency } from "../../utilities";
 
-const OrderSummary = () => {
+const OrderSummary = ({ setOrderPhase }) => {
     const { totals, optionCounts } = useOrderDetails();
 
     const scoopArray = Object.entries(optionCounts.scoops);
@@ -18,11 +18,11 @@ const OrderSummary = () => {
     return (
         <div>
             <h1>주문 내용</h1>
-            <h2>스쿱: {formatCurrency(totals.scoops)}</h2>
+            <h2>Scoops: {formatCurrency(totals.scoops)}원</h2>
             <ul>{scoopList}</ul>
-            <h2>토핑: {formatCurrency(totals.toppings)}</h2>
+            <h2>Toppings: {formatCurrency(totals.toppings)}원</h2>
             <ul>{toppingList}</ul>
-            <SummaryForm />
+            <SummaryForm setOrderPhase={setOrderPhase} />
         </div>
     );
 };

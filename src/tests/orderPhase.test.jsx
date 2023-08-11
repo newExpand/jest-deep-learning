@@ -20,7 +20,7 @@ test("주문 테스트", async () => {
     const orderSummaryButton = screen.getByRole("button", { name: "선데이 주문하기" });
     await user.click(orderSummaryButton);
 
-    const summaryHeading = screen.getByRole("heading", { name: "주문 요약" });
+    const summaryHeading = screen.getByRole("heading", { name: "주문 내용" });
     expect(summaryHeading).toBeInTheDocument();
 
     const scoopsHeading = screen.getByRole("heading", { name: "Scoops: 6,000원" });

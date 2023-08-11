@@ -1,8 +1,9 @@
+import Button from "react-bootstrap/Button";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 import { formatCurrency } from "../../utilities";
 import Options from "./Options";
 
-const OrderEntry = () => {
+const OrderEntry = ({ setOrderPhase }) => {
     const { totals } = useOrderDetails();
 
     return (
@@ -11,6 +12,7 @@ const OrderEntry = () => {
             <Options optionType="scoops" />
             <Options optionType="toppings" />
             <h2>전체 총액: {formatCurrency(totals.scoops + totals.toppings)}원</h2>
+            <Button onClick={() => setOrderPhase("리뷰")}>선데이 주문하기</Button>
         </div>
     );
 };
