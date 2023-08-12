@@ -33,22 +33,22 @@ test("주문 테스트", async () => {
     expect(screen.getByText("2 Chocolate")).toBeInTheDocument();
     expect(screen.getByText("Cherries")).toBeInTheDocument();
 
-    const tcCheckbox = screen.getByRole("checkbox", { name: "이용약관" });
+    const tcCheckbox = screen.getByRole("checkbox", { name: /이용약관/g });
     await user.click(tcCheckbox);
 
     const confirmOrderButton = screen.getByRole("button", { name: "주문확인" });
     await user.click(confirmOrderButton);
 
-    const loading = screen.getByText(/로딩중/g);
+    const loading = screen.getByText("로딩중");
     expect(loading).toBeInTheDocument();
 
     const thankYouHeader = await screen.findByRole("heading", { name: /감사합니다/g });
     expect(thankYouHeader).toBeInTheDocument();
 
-    const notLoading = screen.queryByText("로딩중");
+    const notLoading = screen.queryByText("진행중");
     expect(notLoading).not.toBeInTheDocument();
 
-    const orderNumber = await screen.findByText("주문번호");
+    const orderNumber = await screen.findByText(/주문번호/g);
     expect(orderNumber).toBeInTheDocument();
 
     const newOrderButton = screen.getByRole("button", { name: "새 주문하기" });

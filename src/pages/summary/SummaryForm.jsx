@@ -4,8 +4,14 @@ import Popover from "react-bootstrap/Popover";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const SummaryForm = () => {
+const SummaryForm = ({ setOrderPhase }) => {
     const [tcChecked, setTcChecked] = useState(false);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        setOrderPhase("완료");
+    };
 
     const popover = (
         <Popover id="popover-basic">
@@ -24,7 +30,7 @@ const SummaryForm = () => {
     );
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Form.Group controlId="이용약관">
                 <Form.Check
                     type="checkbox"
