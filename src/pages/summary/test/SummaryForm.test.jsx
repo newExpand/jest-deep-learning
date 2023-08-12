@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 test("초기 이용약관 체크박스와 버튼 상태 테스트", () => {
     render(<SummaryForm />);
 
-    const checkbox = screen.getByRole("checkbox", { name: /이용약관/g });
+    const checkbox = screen.getByRole("checkbox", { name: /이용약관/ });
     const checkedEnabledButton = screen.getByRole("button", { name: "주문확인" });
 
     // 체크박스가 체크가 안됐는지 확인
@@ -19,7 +19,7 @@ test("이용약관 체크박스 체크 시 버튼 활성화 및 체크박스 체
     const user = userEvent.setup();
     render(<SummaryForm />);
 
-    const checkbox = screen.getByRole("checkbox", { name: /이용약관/g });
+    const checkbox = screen.getByRole("checkbox", { name: /이용약관/ });
     const checkedEnabledButton = screen.getByRole("button", { name: "주문확인" });
 
     // 체크박스에 체크를 했을 때, 버튼 활성화

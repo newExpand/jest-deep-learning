@@ -11,7 +11,7 @@ test("토핑과 스쿱 라우트에 대한 에러핸들링 테스트", async () 
         )
     );
 
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
 
     await waitFor(async () => {
         const alerts = await screen.findAllByRole("alert");
