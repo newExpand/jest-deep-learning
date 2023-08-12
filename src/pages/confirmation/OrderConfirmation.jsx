@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import AlertBanner from "../common/AlertBanner";
 
 const OrderConfirmation = ({ setOrderPhase }) => {
     const { resetOrder } = useOrderDetails();
+    const [error, setError] = useState(false);
     const [orderNumber, setOrderNumber] = useState(null);
 
     useEffect(() => {
@@ -14,6 +16,7 @@ const OrderConfirmation = ({ setOrderPhase }) => {
                 setOrderNumber(response.data.orderNumber);
             })
             .catch((error) => {
+                setError(true);
                 // TODO: 에러 핸들링할 예정
             });
     }, []);
@@ -24,6 +27,17 @@ const OrderConfirmation = ({ setOrderPhase }) => {
         setOrderPhase("진행중");
     };
 
+    const newOrderButton = <Button onClick={handleClick}>새 주문하기</Button>;
+
+    if (error) {
+        return (
+            <>
+                <AlertBanner message={null} variant={null} />
+                {newOrderButton}
+            </>
+        );
+    }
+
     if (orderNumber) {
         return (
             <div style={{ textAlign: "center" }}>
@@ -32,7 +46,7 @@ const OrderConfirmation = ({ setOrderPhase }) => {
                 <p style={{ fontSize: "25%" }}>
                     이용약관에 따라 지금은 아무 일도 일어나지 않습니다
                 </p>
-                <Button onClick={handleClick}>새 주문하기</Button>
+                {newOrderButton}
             </div>
         );
     } else {
